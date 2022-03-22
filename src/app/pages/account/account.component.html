@@ -1,0 +1,63 @@
+<!-- should have a <app-header> -->
+<app-header></app-header>
+
+<!-- should have a <section> with bootstrap accordian to display User Details, Previous Orders -->
+<!-- use ngModel to double bind user values for updation-->
+<section>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        User Details
+                    </button>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    <label for="firstName" class="mx-3">First Name:</label>
+                    <input type="text" [(ngModel)]="user.firstName" name="firstName" id="firstName">
+                    <br>
+                    <label for="lastName" class="mx-3">Last Name:</label>
+                    <input type="text" [(ngModel)]="user.lastName" name="lastName" id="lastName">
+                    <br>
+                    <label for="email" class="mx-3">Email:</label>
+                    <input type="text" [(ngModel)]="user.email" name="email" id="email">
+                    <br>
+                    <label for="password" class="mx-3">Password:</label>
+                    <input type="text" [(ngModel)]="user.password" name="password" id="password">
+                    <br><br>
+                    <button type="submit" class="btn btn-primary" (click)="update()">Update User</button>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header" id="headingTwo">
+                <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Previous Orders by {{user.email}}
+                    </button>
+                </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div class="card-body row">
+                    <div class="card col-4" style="width: 18rem;" *ngFor="let order of orders;">
+                        <div class="card-body" *ngFor="let cartProduct of order.cartProducts">
+                            <h5 class="card-title">{{cartProduct.productName}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Quantity: {{cartProduct.quantity}}</h6>
+                            <p class="card-text">Price: {{cartProduct.price}}</p>
+                        </div>
+                        <h5>Total Bill: {{order.totalBill}}</h5>
+                        <h6>Status: {{order.status}}</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- should have a <app-footer> -->
+    <app-footer></app-footer>

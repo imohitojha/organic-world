@@ -1,0 +1,33 @@
+<!-- should have a <app-header> -->
+    <app-header></app-header>
+
+<!-- should have a <section> with a table of columns product, price, quantity, subtotal -->
+<!-- the subtotal should have delete button to delete the product-->
+<section>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">SubTotal</th>
+            <th scope="col">Action Buttons</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of items; let i = index" [attr.data-index]="i">
+          <tr>
+            <th scope="row">{{item.productName}}</th>
+            <td>&#8377; <input [(ngModel)]="item.price" type="number" disabled /></td>
+            <input type="number" [(ngModel)]="item.quantity">
+            <td>{{subTotal[i]}}</td>
+            <td>
+                <button type="button" class="btn btn-warning m-1" (click)="updateQuantity()">Update Quantity</button>
+                <button type="button" class="btn btn-danger m-1" (click)="removeProduct(i)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary m-1" (click)="checkOut()">Checkout</button>
+</section>
+
+<!-- should have a <app-footer> -->

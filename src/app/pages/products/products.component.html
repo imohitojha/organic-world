@@ -1,0 +1,27 @@
+<!-- should have a <app-header> -->
+<app-header></app-header>
+
+<!-- should have a <section> with card grid with Quantity selector, 'Add To Cart' button to display all products -->
+<section>
+    <div class="row">
+        <div class="col-4" *ngFor="let item of items; let i = index" [attr.data-index]="i">
+            <div class="card h-100" style="width: 18rem;">
+                <img src={{item.image}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p class="card-text">{{item.category}}</p>
+                    <p class="card-text">&#8377; {{item.price}}</p>
+                    <p class="card-text">{{item.description}}</p>
+                    <div class="row">
+                        <label for="quantity" class="m-2">Quantity:</label>
+                        <input type="number" style="width: 5rem;" id="quantity" (input)="changeQuantity($event, i)" />
+                    </div>
+                    <button href="#" routerLink="./" class="btn btn-primary mt-3" (click)="addProduct(item)">Add To Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- should have a <app-footer> -->
+    <app-footer></app-footer>

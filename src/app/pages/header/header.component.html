@@ -1,0 +1,126 @@
+ <!-- should have a navbar with search bar, Register, Login, Home, Products dropdown, Cart, Account -->
+ <!-- Login, Register should be modal with email, password and email, password, confirm password as inputs respectively and inputs should be validated -->
+ <!-- Products, Account, Home,SignOut tabs should be available only after successful login and Login and Register should not be present after successful login-->
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-md fixed-top">
+  <a class="navbar-brand" href="#"><img src="../../../assets/images/logo.webp" alt="Logo"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li>
+        <a (click)="hide = false" href="" class="nav-link" data-toggle="modal" data-target="#registerModal">
+          Register
+        </a>
+      </li>
+      <li>
+        <a #loginButton href="" *ngIf="!isLoggedIn" class="nav-link" data-toggle="modal" data-target="#loginModal">
+          Login
+        </a>
+        <a *ngIf="isLoggedIn" class="nav-link" (click)="signOut()">Logout</a>
+      </li>
+      <li>
+        <a class="nav-link" href="/#/home">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#" routerLink="/products/fruit">Fruit</a>
+          <a class="dropdown-item" href="#" routerLink="/products/vegetable">Vegetable</a>
+          <a class="dropdown-item" href="#" routerLink="/products/grocery">Grocery</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/#/cart">Cart</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/#/account">Account</a>
+      </li>
+    </ul>
+    <form [formGroup]="searchForm" (ngSubmit)="search(searchForm.value)" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" formControlName="content" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+
+<div [hidden]="hide" class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign up</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fas fa-envelope prefix grey-text"></i>
+            <input type="email" formControlName="email" id="registerEmailId" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="registerEmailId">Your email</label>
+          </div>
+
+          <div class="md-form mb-5">
+            <i class="fas fa-lock prefix grey-text"></i>
+            <input type="password" formControlName="password" id="registerPasswordId" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="registerPasswordId">Your password</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-lock prefix grey-text"></i>
+            <input type="password" formControlName="confirmPassword" id="registerConfirmPasswordId" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="registerConfirmPasswordId">Confirm password</label>
+          </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-deep-orange" [disabled]="!registerForm.valid" type="submit">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="logIn(loginForm.value)">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fas fa-envelope prefix grey-text"></i>
+            <input type="email" formControlName="email" id="loginEmailId" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="loginEmailId">Your email</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-lock prefix grey-text"></i>
+            <input type="password" formControlName="password" id="loginPasswordId" class="form-control validate">
+            <label data-error="wrong" data-success="right" for="loginPasswordId">Your password</label>
+          </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button class="btn btn-default" [disabled]="!loginForm.valid" type="submit">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

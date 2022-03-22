@@ -1,0 +1,11 @@
+
+.carousel {
+    margin-top: 20vh;
+    margin-left: 20vw;
+    width:640px;
+    height:300px;
+  }
+
+  .w-100 {
+    height: 50vh;
+  }
